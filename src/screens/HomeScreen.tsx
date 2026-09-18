@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Folder, Plus, ChevronDown, ArrowUp, Settings, Github, MessageSquare, Paperclip } from 'lucide-react-native';
 import { supabase, supabaseBucketName } from '../lib/supabase';
 import { globalStyles as styles } from '../styles/globalStyles';
@@ -121,8 +121,9 @@ export default function HomeScreen({
   };
 
   return (
-    <View style={styles.welcomeScreen}>
-      <Text style={styles.welcomeTitle}>¡Comencemos a construir!</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.welcomeScreen}>
+        <Text style={styles.welcomeTitle}>¡Comencemos a construir!</Text>
       
       {selectedWorkspace && (
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
@@ -214,6 +215,7 @@ export default function HomeScreen({
           </View>
         </View>
       </View>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
